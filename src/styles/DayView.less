@@ -1,3 +1,10 @@
+// Breakpoints
+@xs: 576px;
+@sm: 768px;
+@md: 992px;
+@lg: 1200px;
+@xl: 1600px;
+
 .dayview-container {
   position: relative;
   margin-top: 2rem;
@@ -8,6 +15,9 @@
   display: flex;
   flex-direction: column;
   margin: 0 1em;
+  @media(max-width: @md) {
+    margin: 0 1em 3em 1em;
+  }
 }
 
 .hour-row {
@@ -34,6 +44,7 @@
   font-weight: bold;
   margin-bottom: 0.5em;
   margin-left: 0;
+  color: #243D6F;
 }
 
 .button-container {
@@ -41,6 +52,10 @@
   top: 0;
   right: 0;
   margin-right: 2rem;
+}
+
+.button-container > *:not(:last-child) {
+  margin-right: 0.5em;
 }
 
 .action-button {
@@ -51,6 +66,13 @@
   height: 40px;
   border-radius: 50%;
   color: #fff;
+}
+
+.small-only{
+  display: none;
+  @media(max-width: @md) {
+    display: inline-block;
+  }
 }
 
 .hr {

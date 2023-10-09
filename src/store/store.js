@@ -8,6 +8,8 @@ const store = configureStore({
   preloadedState: {
     globalProps: {
       date: new Date().toDateString(),
+      isModalOpen: false,
+      isCalendarOpen: false,
     }
   }
 });

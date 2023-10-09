@@ -1,16 +1,25 @@
 import { useSelector } from "react-redux";
 
+import { useModal } from "../service/useModal";
+import { useCalendarModal } from "../service/useCalendarModal";
+
+import EventModal from "./EventModal.jsx";
+import CalendarModal from "./CalendarModal.jsx";
+
 import "../styles/DayView.less";
 
 function DayView() {
+  const { isModalOpen, triggerModal } = useModal();
+  const { isCalendarOpen, triggerCalendarModal } = useCalendarModal();
   const date = useSelector((state) => state.globalProps.date);
-  function formatDate(date) {
-    const dateStr = date;
-    const dateParts = dateStr.split(" ");
-    const day = dateParts[2];
-    const month = dateParts[1];
-    return `${day} ${month}`;
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const options = { day: "2-digit", month: "long" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+    return formattedDate;
   }
+
+  console.log(date);
 
   const hours = [];
   for (let hour = 9; hour <= 20; hour++) {
@@ -21,7 +30,14 @@ function DayView() {
     <div className="dayview-container">
       <h3 className="date">{formatDate(date)}</h3>
       <div className="button-container">
-        <button title="Add event" className="action-button" onClick={() => console.log('add event')}>
+        <button title="Show calendar" className="action-button small-only" onClick={triggerCalendarModal}>
+          <i className="bi bi-calendar"></i>
+        </button>
+        <button
+          title="Add event"
+          className="action-button"
+          onClick={triggerModal}
+        >
           <i className="bi bi-plus-lg"></i>
         </button>
       </div>
@@ -36,6 +52,8 @@ function DayView() {
           </div>
         ))}
       </div>
+      {isModalOpen && <EventModal />}
+      {isCalendarOpen && <CalendarModal />}
     </div>
   );
 }
