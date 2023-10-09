@@ -13,9 +13,14 @@
 
 .eventmodal {
   background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
+  padding: 1.5em;
   position: relative;
+  width: 550px;
+  margin: 0 1em;
+}
+
+.eventmodal form * {
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .eventmodal-close {
@@ -25,4 +30,69 @@
   cursor: pointer;
   font-size: 24px;
   color: #888;
+}
+
+.eventmodal-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.eventmodal-row:first-of-type {
+  align-items: end;
+}
+
+.eventmodal-row:last-of-type {
+  justify-content: end;
+  margin-bottom: 0;
+}
+
+.eventmodal-input {
+  flex-grow: 1;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #E0CCFC;
+}
+
+#title-input {
+  font-size: 1.75rem;
+  margin-right: 1rem;
+}
+
+#picker-input {
+  flex-grow: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.eventmodal-icon{
+  font-size: 1.5rem;
+  margin-right: 1em;
+}
+
+#date-input, #time-input-from, #time-input-to {
+  border: none;
+  background-color: #E0CCFC;
+  padding-inline: 0.5em;
+  padding-block: 0.5em;
+}
+
+#time-input-from {
+  margin-right: 1em;
+}
+
+#comment-textarea {
+  resize: vertical;
+  font-size: .75rem;
+}
+
+.eventmodal-submit {
+  background-color: #6200EE;
+  border: none;
+  color: #fff;
+  width: 6rem;
+  padding: 2px;
 }

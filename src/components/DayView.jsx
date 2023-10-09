@@ -31,7 +31,7 @@ function DayView() {
       <h3 className="date">{formatDate(date)}</h3>
       <div className="button-container">
         <button title="Show calendar" className="action-button small-only" onClick={triggerCalendarModal}>
-          <i className="bi bi-calendar"></i>
+          <i className="bi bi-calendar4"></i>
         </button>
         <button
           title="Add event"
@@ -52,8 +52,8 @@ function DayView() {
           </div>
         ))}
       </div>
-      {isModalOpen && <EventModal />}
-      {isCalendarOpen && <CalendarModal />}
+      {isModalOpen && <EventModal currentDate={date} />}
+      {isCalendarOpen && <CalendarModal currentDate={date} />}
     </div>
   );
 }

@@ -1,19 +1,19 @@
+import PropTypes from "prop-types";
+
 import Calendar from "react-calendar";
 
 import { useCalendarModal } from "../service/useCalendarModal";
 
 import { setDate } from "../store/globalPropsSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import "../styles/CalendarModal.less"
 import "../styles/Calendar.less";
 
-function CalendarView() {
+function CalendarView({currentDate}) {
   const dispatch = useDispatch();
 
   const { triggerCalendarModal } = useCalendarModal();
-
-  const date = useSelector((state) => state.globalProps.date);
 
   const handleDateChange = (newDate) => {
     dispatch(setDate(newDate.toDateString()));
@@ -27,12 +27,16 @@ function CalendarView() {
         </span>
         <Calendar
         onClickDay={handleDateChange}
-        value={new Date(date)}
+        value={new Date(currentDate)}
         locale="en"
       />
       </div>
     </div>
   );
 }
+
+CalendarView.propTypes = {
+  currentDate: PropTypes.string.isRequired,
+};
 
 export default CalendarView;
