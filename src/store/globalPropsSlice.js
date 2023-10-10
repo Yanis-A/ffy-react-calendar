@@ -4,7 +4,12 @@ const initialState = {
   date: new Date().toDateString(),
   isModalOpen: false,
   isCalendarOpen: false,
-  events: {}
+  events: {},
+  banner: {
+    type: "",
+    message: "",
+    uuid: "",
+  },
 };
 
 const globalPropsSlice = createSlice({
@@ -23,9 +28,12 @@ const globalPropsSlice = createSlice({
     setEvents: (state, action) => {
       state.events = action.payload;
     },
+    setBanner: (state, action) => {
+      state.banner = action.payload;
+    },
   },
 });
 
-export const { setDate, setIsModalOpen, setIsCalendarOpen, setEvents } = globalPropsSlice.actions;
+export const { setDate, setIsModalOpen, setIsCalendarOpen, setEvents, setBanner } = globalPropsSlice.actions;
 
 export default globalPropsSlice.reducer;

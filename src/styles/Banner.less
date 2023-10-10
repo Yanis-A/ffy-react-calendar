@@ -1,0 +1,62 @@
+.alert-banner {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 1rem;
+  width: fit-content;
+  border-radius: 2px;
+  z-index: 9999;
+  transition: all 0.2s ease-in-out;
+
+  button.close {
+    float: right;
+    padding: 1rem;
+    background-color: transparent;
+    border: none;
+    color: #ffffffb0;
+    &:hover {
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  &.success {
+    background-color: #28a745;
+    color: #fff;
+    border-color: #28a745;
+  }
+
+  &.danger {
+    background-color: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
+  }
+
+  &.warning {
+    background-color: #ffc107;
+    color: #000;
+    border-color: #ffc107;
+    button.close {
+      color: #000000b0;
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  &.info {
+    background-color: #17a2b8;
+    color: #fff;
+    border-color: #17a2b8;
+  }
+
+  .alert-banner-icon {
+    margin-right: 0.5em;
+    padding-left: 1rem;
+  }
+}

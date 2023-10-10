@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { useModal } from "../service/useModal";
 
-import { setEvents } from "../store/globalPropsSlice";
+import { setEvents, setBanner } from "../store/globalPropsSlice";
 
 import "../styles/EventModal.less";
 
@@ -81,7 +81,12 @@ function EventModal({ currentDate }) {
     if (eventsCopy[formObject["date"]]) {
       for (let i = 0; i < eventsCopy[formObject["date"]].length; i++) {
         if (areEventsDuplicates(eventsCopy[formObject["date"]][i], formObject)) {
-          alert("You already have an event with the same title on this date.");
+          // alert("You already have an event with the same title on this date.");
+          dispatch(setBanner({
+            type: "danger",
+            message: "The event you are trying to add already exists.",
+            uuid: crypto.randomUUID(),
+          }));
           return;
         }
       }
@@ -90,6 +95,11 @@ function EventModal({ currentDate }) {
     // Verify if the time slot is occupied
     if (isTimeSlotOccupied(eventsCopy, formObject)) {
       alert("You already have an event at this time.");
+      dispatch(setBanner({
+        type: "danger",
+        message: "You already have an event at this time.",
+        uuid: crypto.randomUUID(),
+      }));
       return;
     }
 
@@ -102,8 +112,13 @@ function EventModal({ currentDate }) {
     }
 
     dispatch(setEvents(eventsCopy));
-  
+    dispatch(setBanner({
+      type: "success",
+      message: "Event added successfully.",
+      uuid: crypto.randomUUID(),
+    }));
     console.log(formObject);
+    triggerModal();
   };
   return (
     <div className="eventmodal-background">
