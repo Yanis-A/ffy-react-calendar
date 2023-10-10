@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 
-import { useEffect } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
 
 import { useModal } from "../service/useModal";
@@ -14,9 +12,6 @@ function EventModal({ currentDate }) {
   const { triggerModal } = useModal();
   const dispatch = useDispatch();
   const events = useSelector((state) => state.globalProps.events);
-  useEffect(() => {
-    console.log(events);
-  }, [events]);
   // Format date to YYYY-MM-DD
   const dateParts = currentDate.split(" ");
   const monthMap = {
@@ -136,7 +131,6 @@ function EventModal({ currentDate }) {
       message: "Event added successfully.",
       uuid: crypto.randomUUID(),
     }));
-    console.log(formObject);
     triggerModal();
   };
   return (

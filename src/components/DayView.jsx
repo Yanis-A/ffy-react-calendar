@@ -78,8 +78,6 @@ function DayView() {
   if (eventsToDisplay.length > 1) {
     const firstEvent = eventsToDisplay[0];
     firstEventHeight = calculateEventHeight(firstEvent, pixelsPerHour);
-    console.log(firstEventHeight);
-    console.log(eventsToDisplay[0]);
   }
 
   const handleDeleteEvent = (eventId) => {
