@@ -34,7 +34,9 @@ const globalPropsSlice = createSlice({
     deleteEvent: (state, action) => {
       const eventIdToDelete = action.payload;
       state.events = Object.keys(state.events).reduce((acc, date) => {
-        acc[date] = state.events[date].filter((event) => event.id !== eventIdToDelete);
+        acc[date] = state.events[date].filter(
+          (event) => event.id !== eventIdToDelete
+        );
         if (acc[date].length === 0) {
           delete acc[date];
         }
@@ -44,6 +46,13 @@ const globalPropsSlice = createSlice({
   },
 });
 
-export const { setDate, setIsModalOpen, setIsCalendarOpen, setEvents, setBanner, deleteEvent } = globalPropsSlice.actions;
+export const {
+  setDate,
+  setIsModalOpen,
+  setIsCalendarOpen,
+  setEvents,
+  setBanner,
+  deleteEvent,
+} = globalPropsSlice.actions;
 
 export default globalPropsSlice.reducer;

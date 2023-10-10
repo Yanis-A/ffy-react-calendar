@@ -7,10 +7,10 @@ import { useCalendarModal } from "../service/useCalendarModal";
 import { setDate } from "../store/globalPropsSlice";
 import { useDispatch } from "react-redux";
 
-import "../styles/CalendarModal.less"
+import "../styles/CalendarModal.less";
 import "../styles/Calendar.less";
 
-function CalendarView({currentDate}) {
+function CalendarView({ currentDate }) {
   const dispatch = useDispatch();
 
   const { triggerCalendarModal } = useCalendarModal();
@@ -26,10 +26,10 @@ function CalendarView({currentDate}) {
           &times;
         </span>
         <Calendar
-        onClickDay={handleDateChange}
-        value={new Date(currentDate)}
-        locale="en"
-      />
+          onClickDay={handleDateChange}
+          value={new Date(currentDate)}
+          locale="en"
+        />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { setDate } from "../store/globalPropsSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 import "../styles/CalendarView.less";
-import "../styles/Calendar.less"
+import "../styles/Calendar.less";
 
 function CalendarView() {
   const dispatch = useDispatch();

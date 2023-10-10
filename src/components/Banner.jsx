@@ -49,10 +49,7 @@ function Banner({ type, message, uuid }) {
   }
 
   return (
-    <div
-      className={`alert-banner ${type}`}
-      role="alert"
-    >
+    <div className={`alert-banner ${type}`} role="alert">
       <span className="alert-banner-icon">
         <i className={iconClassName}></i>
       </span>
@@ -63,13 +60,16 @@ function Banner({ type, message, uuid }) {
         data-bs-dismiss="alert"
         aria-label="Close"
         onClick={handleClose}
-      >&times;</button>
+      >
+        &times;
+      </button>
     </div>
   );
 }
 
 Banner.propTypes = {
-  type: PropTypes.oneOf(["", "info", "success", "warning", "danger"]).isRequired,
+  type: PropTypes.oneOf(["", "info", "success", "warning", "danger"])
+    .isRequired,
   message: PropTypes.string.isRequired,
   uuid: PropTypes.string.isRequired,
 };
