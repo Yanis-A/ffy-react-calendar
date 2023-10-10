@@ -10,6 +10,7 @@ const store = configureStore({
       date: new Date().toDateString(),
       isModalOpen: false,
       isCalendarOpen: false,
+      events: {}
     }
   }
 });

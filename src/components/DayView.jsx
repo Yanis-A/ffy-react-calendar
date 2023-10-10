@@ -19,7 +19,7 @@ function DayView() {
     return formattedDate;
   }
 
-  console.log(date);
+  // console.log(date);
 
   const hours = [];
   for (let hour = 9; hour <= 20; hour++) {
