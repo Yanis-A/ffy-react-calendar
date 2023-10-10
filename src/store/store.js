@@ -1,5 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import globalPropsReducer from "./globalPropsSlice";
+import { localStorageMiddleware } from "../middleware/localStorageMiddleware";
+
+const storedEvents = JSON.parse(localStorage.getItem("events"));
 
 const store = configureStore({
   reducer: {
@@ -10,14 +13,15 @@ const store = configureStore({
       date: new Date().toDateString(),
       isModalOpen: false,
       isCalendarOpen: false,
-      events: {},
+      events: storedEvents || {},
       banner: {
         type: "",
         message: "",
         uuid: "",
       },
     }
-  }
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware),
 });
 
 export default store;

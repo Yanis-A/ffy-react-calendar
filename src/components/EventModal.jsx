@@ -37,7 +37,14 @@ function EventModal({ currentDate }) {
     dateParts[2]
   }`;
   // Verification functions
-  // Creating duplicate
+  // 1- Check incoherent times
+  function isTimeIncoherent(event) {
+    return (
+      event.timeFrom > event.timeTo ||
+      event.timeFrom === event.timeTo
+    )
+  }
+  // 2- Prevent duplicate creation
   function areEventsDuplicates(event1, event2) {
     return (
       event1.title === event2.title &&
@@ -46,20 +53,22 @@ function EventModal({ currentDate }) {
       event1.timeTo === event2.timeTo
     );
   }
-  // Creating an event on an occupied time slot
+  // 3- Prevent creation of an event on an occupied time slot
   function isTimeSlotOccupied(eventsCopy, event) {
     if (eventsCopy[event.date]) {
       for (let i = 0; i < eventsCopy[event.date].length; i++) {
+        const existingEvent = eventsCopy[event.date][i];
         if (
-          eventsCopy[event.date][i].timeFrom <= event.timeFrom &&
-          eventsCopy[event.date][i].timeTo >= event.timeTo
+          (existingEvent.timeFrom < event.timeTo && existingEvent.timeTo > event.timeFrom) ||
+          // (existingEvent.timeFrom === event.timeTo || existingEvent.timeTo === event.timeFrom) ||
+          (existingEvent.timeFrom === event.timeFrom && existingEvent.timeTo === event.timeTo)
         ) {
           return true;
         }
       }
     }
     return false;
-  }
+  }  
   // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,6 +85,17 @@ function EventModal({ currentDate }) {
 
     // Proceeding everything on a local copy of the events object
     const eventsCopy = { ...events };
+
+    // Verify if the time is incoherent
+    if (isTimeIncoherent(formObject)) {
+      // alert("The time you entered is incoherent.");
+      dispatch(setBanner({
+        type: "danger",
+        message: "The time you entered is incoherent.",
+        uuid: crypto.randomUUID(),
+      }));
+      return;
+    }
 
     // Verify if the event is a duplicate
     if (eventsCopy[formObject["date"]]) {
@@ -94,10 +114,10 @@ function EventModal({ currentDate }) {
 
     // Verify if the time slot is occupied
     if (isTimeSlotOccupied(eventsCopy, formObject)) {
-      alert("You already have an event at this time.");
+      // alert("You already have an event at this time.");
       dispatch(setBanner({
         type: "danger",
-        message: "You already have an event at this time.",
+        message: "You already have an event at this time. Please choose another time slot or delete the scheduled one.",
         uuid: crypto.randomUUID(),
       }));
       return;
