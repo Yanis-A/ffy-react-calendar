@@ -60,7 +60,6 @@ function EventModal({ currentDate }) {
         const existingEvent = eventsCopy[event.date][i];
         if (
           (existingEvent.timeFrom < event.timeTo && existingEvent.timeTo > event.timeFrom) ||
-          // (existingEvent.timeFrom === event.timeTo || existingEvent.timeTo === event.timeFrom) ||
           (existingEvent.timeFrom === event.timeFrom && existingEvent.timeTo === event.timeTo)
         ) {
           return true;
@@ -83,12 +82,14 @@ function EventModal({ currentDate }) {
     // Format date to the format used in the reducer
     formObject["date"] = new Date(formObject["date"]).toDateString();
 
+    // Add an id to the event
+    formObject["id"] = crypto.randomUUID();
+
     // Proceeding everything on a local copy of the events object
     const eventsCopy = { ...events };
 
     // Verify if the time is incoherent
     if (isTimeIncoherent(formObject)) {
-      // alert("The time you entered is incoherent.");
       dispatch(setBanner({
         type: "danger",
         message: "The time you entered is incoherent.",
@@ -101,7 +102,6 @@ function EventModal({ currentDate }) {
     if (eventsCopy[formObject["date"]]) {
       for (let i = 0; i < eventsCopy[formObject["date"]].length; i++) {
         if (areEventsDuplicates(eventsCopy[formObject["date"]][i], formObject)) {
-          // alert("You already have an event with the same title on this date.");
           dispatch(setBanner({
             type: "danger",
             message: "The event you are trying to add already exists.",
@@ -114,7 +114,6 @@ function EventModal({ currentDate }) {
 
     // Verify if the time slot is occupied
     if (isTimeSlotOccupied(eventsCopy, formObject)) {
-      // alert("You already have an event at this time.");
       dispatch(setBanner({
         type: "danger",
         message: "You already have an event at this time. Please choose another time slot or delete the scheduled one.",
@@ -154,7 +153,6 @@ function EventModal({ currentDate }) {
               placeholder="Add Title"
               id="title-input"
               className="eventmodal-input"
-              // onChange={(e) => console.log(e.target.value)}
               required
             />
             <input
@@ -162,7 +160,6 @@ function EventModal({ currentDate }) {
               name="color"
               id="picker-input"
               className="eventmodal-input"
-              // onChange={(e) => console.log(e.target.value)}
               defaultValue={"#6200EE"}
             />
           </div>
@@ -175,7 +172,6 @@ function EventModal({ currentDate }) {
               name="date"
               id="date-input"
               title="Date"
-              // onChange={(e) => console.log(e.target.value)}
               defaultValue={formattedDate}
               required
             />
@@ -188,7 +184,6 @@ function EventModal({ currentDate }) {
               type="time"
               name="timeFrom"
               id="time-input-from"
-              // onChange={(e) => console.log(e.target.value)}
               step="900"
               min="09:00"
               max="20:00"
@@ -199,7 +194,6 @@ function EventModal({ currentDate }) {
               type="time"
               name="timeTo"
               id="time-input-to"
-              // onChange={(e) => console.log(e.target.value)}
               step="900"
               min="10:00"
               max="20:00"
@@ -213,7 +207,6 @@ function EventModal({ currentDate }) {
               placeholder="comment"
               id="comment-textarea"
               className="eventmodal-input"
-              // onChange={(e) => console.log(e.target.value)}
               maxLength="250"
               rows={1}
             />
